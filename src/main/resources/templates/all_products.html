@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Spring MVC</title>
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>-->
+</head>
+
+<body>
+<div class="container">
+    <h1>Список продуктов:</h1>
+    <table th:if="${frontProduct.size() > 0}" class="table">
+        <thead>
+        <tr>
+            <td>Id</td>
+            <td>Название</td>
+            <td>Цена</td>
+            <td>Действия</td>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="b : ${frontProduct}">
+            <td th:text="${b.id}"></td>
+            <td th:text="${b.title}"></td>
+            <td th:text="${b.cost + ' rub'}"></td>
+            <td><a class="btn btn-danger" th:href="@{'/remove/' + ${b.id}}">Удалить</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <span th:unless="${frontProduct.size() > 0}">Продуктов нет</span>
+    <span th:text="'Количкество товаров: ' + ${frontProduct.size()}"/>
+    <form th:action="@{'/add'}" method="post">
+        <!-- GET http://localhost:8189/app/boxes/add?id=10&color=red&size=20 -->
+        <label>id</label>
+        <input type="number" name="id">
+        <label>title</label>
+        <input type="text" name="title">
+        <label>cost</label>
+        <input type="number" step="0.01" name="cost">
+        <button class="btn btn-primary" type="submit">Создать</button>
+    </form>
+<!--    <div>-->
+<!--        <label>id</label>-->
+<!--        <input type="number" id="id" name="id">-->
+<!--        <a class="btn btn-danger" th:href="@{'/product/' + id.value}">Info</a>-->
+<!--    </div>-->
+</div>
+</body>
+</html>
