@@ -10,7 +10,7 @@ import ru.pentragon.spring1l4.services.ProductService;
 import java.util.Optional;
 
 @Controller
-//@RequestMapping("product")
+@RequestMapping("product")
 public class ProductController {
     public ProductService productService;
 
@@ -24,7 +24,7 @@ public class ProductController {
         return "all_products";
     }
 
-    @GetMapping("/product/{id}")
+    @GetMapping("/{id}")///product/{id}
     public String getProductByID(Model model, @PathVariable Long id) {
         Optional<Product> product = productService.getByID(id);
         System.out.println(product.isPresent());
@@ -39,7 +39,7 @@ public class ProductController {
 //    public String addNewBox(@RequestParam Long id, @RequestParam String color, @RequestParam int size) {
     public String addNewBox(@ModelAttribute Product product) {
         productService.add(product);
-        return "redirect:/all";
+        return "redirect:/product/all";
     }
 
     @PostMapping("/json/add")
@@ -51,7 +51,7 @@ public class ProductController {
     @GetMapping("/remove/{id}")
     public String deleteBoxById(@PathVariable Long id) {
         productService.deleteRecordByID(id);
-        return "redirect:/all";
+        return "redirect:/product/all";
     }
 
 }

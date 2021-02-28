@@ -27,13 +27,13 @@
             <td th:text="${b.id}"></td>
             <td th:text="${b.title}"></td>
             <td th:text="${b.cost + ' rub'}"></td>
-            <td><a class="btn btn-danger" th:href="@{'/remove/' + ${b.id}}">Удалить</a></td>
+            <td><a class="btn btn-danger" th:href="@{'/product/remove/' + ${b.id}}">Удалить</a></td>
         </tr>
         </tbody>
     </table>
     <span th:unless="${frontProduct.size() > 0}">Продуктов нет</span>
     <span th:text="'Количкество товаров: ' + ${frontProduct.size()}"/>
-    <form th:action="@{'/add'}" method="post">
+    <form th:action="@{'/product/add'}" method="post">
         <!-- GET http://localhost:8189/app/boxes/add?id=10&color=red&size=20 -->
         <label>id</label>
         <input type="number" name="id">
